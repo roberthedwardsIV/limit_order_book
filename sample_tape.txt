@@ -1,0 +1,22 @@
+# Sample tape for replay POC. Skip lines starting with #.
+# ADD  id owner type side price qty
+# CANCEL  id
+#
+# type: LIMIT | MARKET | IOC
+# side: BUY | SELL
+# price: integer ticks (ignored on CANCEL)
+
+ADD 1 10 LIMIT BUY 100 5
+ADD 2 11 LIMIT BUY 99 4
+ADD 3 20 LIMIT SELL 101 6
+ADD 4 21 LIMIT SELL 102 3
+CANCEL 2
+ADD 5 30 LIMIT BUY 101 6
+ADD 6 31 LIMIT BUY 100 2
+ADD 7 20 LIMIT SELL 100 2
+ADD 8 40 IOC BUY 102 10
+ADD 9 41 MARKET SELL 0 3
+CANCEL 1
+ADD 10 50 LIMIT BUY 98 8
+ADD 11 51 LIMIT SELL 103 5
+ADD 12 50 LIMIT BUY 103 5

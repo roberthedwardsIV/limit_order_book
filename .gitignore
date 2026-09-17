@@ -6,3 +6,4 @@ a.out
 .DS_Store
 limit_order_book
 book_tests
+build-asan/

@@ -3,6 +3,7 @@
 #include <list>
 #include <optional>
 #include <vector>
+#include <iostream>
 
 enum Side {
     BUY,
@@ -14,6 +15,7 @@ enum OrderType {
     MARKET,
     IOC
 };
+
 
 class Order {
     int order_id;
@@ -354,6 +356,17 @@ class Book {
             }
             else if(order.getOrderQuantity() == (*resting_order_it).getOrderQuantity()) {
                 return Trades;
+            }
+        }
+
+        void print() {
+            std::cout << "bids\n";
+            for(std::map<int, PriceLevel, BuyComparator>::iterator it = buy_side.begin(); it != buy_side.end(); ++it) {
+                std::cout << it->first << " " << it->second.getLevelTotalQuantity() << "\n";
+            }
+            std::cout << "asks\n";
+            for(std::map<int, PriceLevel>::iterator it = sell_side.begin(); it != sell_side.end(); ++it) {
+                std::cout << it->first << " " << it->second.getLevelTotalQuantity() << "\n";
             }
         }
     
