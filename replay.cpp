@@ -43,12 +43,7 @@ int main() {
         }
         else if(!line.compare(0, 6, "CANCEL")) {
             ss >> action_string >> order_id;
-            auto now = std::chrono::system_clock::now();
-            auto duration = now.time_since_epoch();
-            long int timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
-
-            Order order{order_id, owner_id, order_type, order_side, order_price, order_quantity, timestamp};
-            book.cancel(order.getOrderId());
+            book.cancel(order_id);
         }
         else { continue; }
 
