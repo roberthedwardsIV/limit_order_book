@@ -5,7 +5,10 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 set(CMAKE_CXX_STANDARD 17)
 
+add_library(book book.cpp)
+
 add_executable(limit_order_book main.cpp)
+target_link_libraries(limit_order_book PRIVATE book)
 
 include(FetchContent)
 enable_testing()
@@ -18,10 +21,10 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 add_executable(book_tests test.cpp)
-
-target_link_libraries(book_tests PRIVATE GTest::gtest_main)
+target_link_libraries(book_tests PRIVATE book GTest::gtest_main)
 
 add_executable(bench bench.cpp)
+target_link_libraries(bench PRIVATE book)
+
 add_executable(replay replay.cpp)
-
-
+target_link_libraries(replay PRIVATE book)
